@@ -9,7 +9,6 @@ void display(game g[50])
     {
       int kk=0;
       for(kk=0;kk<50;kk++){
-	cout<<"|"<<g[kk].team[0]<<"| and |"<<pteam<<"|\n";
 	if(!(strcmp(g[kk].team[0],pteam) && strcmp(g[kk].team[1],pteam))){
 	  break;
 	}
@@ -17,11 +16,12 @@ void display(game g[50])
       if(kk==50){
 	return;
       }
+      char* ms=g[kk].matchStatus;
       char* team1=g[kk].team[0];
       char* team2=g[kk].team[1];
       char* score1=g[kk].score[0];
       char* score2=g[kk].score[1];
-        char c[500]="notify-send \"\"";
+        char c[500]="notify-send \"";
         int i=0,j=13;
         while(team1[i]!='\0')
         {
@@ -57,8 +57,16 @@ void display(game g[50])
             i++;j++;
         }
         c[j]='"';j++;
+        c[j]=' ';j++;
+       	c[j]='"';j++;
+	i=0;
+        while(ms[i]!='\0')
+        {
+            c[j]=ms[i];
+            i++;j++;
+        }
+	c[j]='"';j++;
         c[j]='\0';
-	cout<<c<<endl;
         system(c);
 }
 
